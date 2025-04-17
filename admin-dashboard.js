@@ -13,28 +13,6 @@ document.addEventListener('DOMContentLoaded', async function() {
         window.location.href = 'admin.html';
     });
 
-    // Add these event listeners to your DOMContentLoaded handler in admin-dashboard.js
-
-// Clear storage button
-document.getElementById('clear-storage').addEventListener('click', function() {
-    if (confirm('Are you sure you want to delete ALL menu items? This cannot be undone!')) {
-        localStorage.removeItem('menuItems');
-        loadMenuItems(); // Reload the empty list
-        alert('All menu items have been deleted.');
-    }
-});
-
-    // Migrate images button
-    document.getElementById('migrate-images').addEventListener('click', async function() {
-        this.disabled = true;
-        this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Migrating...';
-        
-        await migrateImagesToGitHub();
-        
-        this.disabled = false;
-        this.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Migrate Images to GitHub';
-    });
-
     // Add this code to your admin-dashboard.js, inside the DOMContentLoaded event handler
 
 // Handle refresh from GitHub button
@@ -310,7 +288,7 @@ function resizeImage(base64Str, maxWidth = 400, maxHeight = 400) {
     });
 }
 
-// Add the migration function to admin-dashboard.js
+// Function to migrate existing base64 images to GitHub
 async function migrateImagesToGitHub() {
     const menuItems = JSON.parse(localStorage.getItem('menuItems')) || [];
     let updated = false;
@@ -347,4 +325,15 @@ async function migrateImagesToGitHub() {
     
     return updated;
 }
+
+// Add a button for this in your admin interface
+document.getElementById('migrate-images').addEventListener('click', async function() {
+    this.disabled = true;
+    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Migrating...';
+    
+    await migrateImagesToGitHub();
+    
+    this.disabled = false;
+    this.innerHTML = 'Migrate Images to GitHub';
+});
 });
