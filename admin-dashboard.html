@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Delight - Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+        integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin-style.css">
+    <link rel="icon" href="./images/icon.jpg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container container">
+            <input type="checkbox" name="" id="">
+            <div class="hamburger-lines">
+                <span class="line line1"></span>
+                <span class="line line2"></span>
+                <span class="line line3"></span>
+            </div>
+            <ul class="menu-items">
+                <li><a href="index.html">Main Website</a></li>
+                <li><a href="#" id="logout-btn">Logout</a></li>
+            </ul>
+            <h1 class="logo">RD Admin</h1>
+        </div>
+    </nav>
+
+    <div class="admin-container" id="dashboard-container">
+        <h1>Menu Item Management</h1>
+        
+        <div class="admin-panel">
+            <div class="menu-items-container">
+                <h2>Current Menu Items</h2>
+                <div id="menu-items-list">
+                    <!-- Menu items will be loaded here -->
+                    <div class="loading">Loading items...</div>
+                </div>
+            </div>
+            
+            <div class="add-item-container">
+                <h2>Add New Menu Item</h2>
+                <form id="add-item-form">
+                    <div class="form-group">
+                        <label for="item-title">Item Title</label>
+                        <input type="text" id="item-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-description">Description</label>
+                        <textarea id="item-description" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-price">Price (₹)</label>
+                        <input type="number" id="item-price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item-price-suffix">Price Suffix (e.g., /plate, /combo)</label>
+                        <input type="text" id="item-price-suffix">
+                    </div>
+                    <div class="form-group">
+                        <label for="item-image">Image</label>
+                        <input type="file" id="item-image" accept="image/*" required>
+                        <div class="image-preview" id="image-preview"></div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Item</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-dashboard.js"></script>
+    <script src="github-sync.js"></script>
+</body>
+</html>
