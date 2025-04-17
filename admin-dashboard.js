@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // Check if user is logged in
     const isLoggedIn = localStorage.getItem('adminLoggedIn') === 'true';
     if (!isLoggedIn) {
@@ -13,11 +13,28 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = 'admin.html';
     });
 
+    // Add this code to your admin-dashboard.js, inside the DOMContentLoaded event handler
+
+// Handle refresh from GitHub button
+document.getElementById('refresh-github-data').addEventListener('click', async function() {
+    this.disabled = true;
+    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Refreshing...';
+    
+    await loadFromGitHub();
+    loadMenuItems();
+    
+    this.disabled = false;
+    this.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh from GitHub';
+});
+
     // Elements
     const addItemForm = document.getElementById('add-item-form');
     const menuItemsList = document.getElementById('menu-items-list');
     const imageInput = document.getElementById('item-image');
     const imagePreview = document.getElementById('image-preview');
+
+    // Try to load menu items from GitHub first, then fall back to localStorage
+    await loadFromGitHub();
 
     // Load menu items from localStorage
     loadMenuItems();
@@ -82,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Function to save a menu item
-    function saveMenuItem(item) {
+    window.saveMenuItem = function(item) {
         // Get existing items
         let menuItems = JSON.parse(localStorage.getItem('menuItems')) || [];
         
@@ -91,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Save back to localStorage
         localStorage.setItem('menuItems', JSON.stringify(menuItems));
-    }
+    };
 
     // Function to load and display menu items
     function loadMenuItems() {
@@ -129,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Function to delete a menu item
-    function deleteMenuItem(itemId) {
+    window.deleteMenuItem = function(itemId) {
         if (confirm('Are you sure you want to delete this item?')) {
             // Get existing items
             let menuItems = JSON.parse(localStorage.getItem('menuItems')) || [];
@@ -143,5 +160,37 @@ document.addEventListener('DOMContentLoaded', function() {
             // Reload items list
             loadMenuItems();
         }
+    };
+
+    // Function to load data from GitHub
+    async function loadFromGitHub() {
+        try {
+            const repo = localStorage.getItem('githubRepo');
+            
+            if (!repo) {
+                console.log('GitHub repo not configured, using localStorage data');
+                return;
+            }
+            
+            // Show loading message
+            menuItemsList.innerHTML = '<div class="loading">Loading items from GitHub...</div>';
+            
+            // Fetch the menu data file from GitHub
+            const response = await fetch(`https://raw.githubusercontent.com/${repo}/main/menu-data.json`);
+            
+            if (response.status === 200) {
+                const menuData = await response.json();
+                
+                // Store in localStorage
+                localStorage.setItem('menuItems', JSON.stringify(menuData));
+                
+                console.log('Successfully loaded menu data from GitHub');
+            } else {
+                console.log('Could not fetch menu data from GitHub, using localStorage data');
+            }
+        } catch (error) {
+            console.error('Error loading from GitHub:', error);
+        }
     }
-});
+}
+);

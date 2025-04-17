@@ -18,7 +18,16 @@ body {
 * {
   font-family: Georgia, 'Times New Roman', Times, serif;
 }
-
+/* Add this to your style.css file */
+.no-menu-items {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  margin: 20px 0;
+  color: #666;
+  font-style: italic;
+}
 
 
 .container {

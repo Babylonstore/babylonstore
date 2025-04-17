@@ -9,6 +9,34 @@
     border-radius: 8px;
 }
 
+/* Add this to your admin-style.css file */
+.menu-items-actions {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+.btn-secondary:disabled {
+    background-color: #adb5bd;
+    cursor: not-allowed;
+}
+
 .admin-form-container {
     max-width: 500px;
     margin: 0 auto;

@@ -1,11 +1,14 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // Get the container where menu items will be displayed
     const foodMenuContainer = document.querySelector('.food-menu-container');
     
-    // Load menu items from localStorage
-    const menuItems = JSON.parse(localStorage.getItem('menuItems')) || [];
+    // Try to fetch menu data from GitHub first
+    let menuItems = await loadMenuFromGitHub() || JSON.parse(localStorage.getItem('menuItems')) || [];
     
-    // If there are custom menu items, add them to the existing menu
+    // Clear any existing content in the container
+    foodMenuContainer.innerHTML = '';
+    
+    // If there are menu items, add them to the container
     if (menuItems.length > 0) {
         menuItems.forEach(item => {
             const menuItemHTML = `
@@ -24,5 +27,44 @@ document.addEventListener('DOMContentLoaded', function() {
             // Append to the container
             foodMenuContainer.innerHTML += menuItemHTML;
         });
+    } else {
+        // Display a message if no menu items are available
+        foodMenuContainer.innerHTML = `
+            <div class="no-menu-items">
+                <p>No menu items available yet. Please check back soon!</p>
+            </div>
+        `;
     }
 });
+
+// Function to load menu data from GitHub
+async function loadMenuFromGitHub() {
+    try {
+        // Try to get the repository information from localStorage
+        const repo = localStorage.getItem('githubRepo');
+        
+        if (!repo) {
+            console.log('GitHub repo not configured, using localStorage data');
+            return null;
+        }
+        
+        // Fetch the menu data file from GitHub
+        // Using raw content URL to avoid CORS issues and no need for authentication to read public files
+        const response = await fetch(`https://raw.githubusercontent.com/${repo}/main/menu-data.json`);
+        
+        if (response.status === 200) {
+            const menuData = await response.json();
+            
+            // Store in localStorage for offline access or when GitHub is unavailable
+            localStorage.setItem('menuItems', JSON.stringify(menuData));
+            
+            return menuData;
+        } else {
+            console.log('Could not fetch menu data from GitHub, using localStorage data');
+            return null;
+        }
+    } catch (error) {
+        console.error('Error loading menu from GitHub:', error);
+        return null;
+    }
+}
