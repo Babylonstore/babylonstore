@@ -6,18 +6,17 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.html {
+html {
   font-size: 62.5%;
 }
 
 body {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  /* redundant font-family removed */
 }
-* {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-}
+
 /* Add this to your style.css file */
 .no-menu-items {
   text-align: center;
@@ -28,7 +27,6 @@ body {
   color: #666;
   font-style: italic;
 }
-
 
 .container {
   max-width: 1200px;
@@ -45,7 +43,7 @@ body {
   outline: none;
   margin-top: 1em;
   text-transform: uppercase;
-  font-weight: small;
+  font-weight: 400; /* fixed */
 }
 
 .btn-primary {
@@ -55,12 +53,11 @@ body {
 
 .btn-primary:hover {
   background: #117964;
-  transition: background 0.3s ease-in-out;
 }
 
-/* ............/navbar/............ *
+/* ............/navbar/............ */
 
-/* desktop mode............/// */
+/* desktop mode............ */
 
 .navbar input[type="checkbox"],
 .navbar .hamburger-lines {
@@ -71,7 +68,7 @@ body {
   box-shadow: 0px 5px 10px 0px #aaa;
   position: fixed;
   width: 100%;
-  background:#6ec59c;
+  background: #6ec59c;
   color: #000;
   opacity: 0.85;
   height: 50px;
@@ -106,7 +103,6 @@ body {
 
 .menu-items a:hover {
   color: #117964;
-  transition: color 0.3s ease-in-out;
 }
 
 .logo {
@@ -271,7 +267,6 @@ body {
   background: rgba(0, 0, 0, 0.871);
   opacity: 0;
   z-index: 1;
-
   transform: scaleY(0);
   transform-origin: 100% 100%;
   transition: all 0.3s ease-in-out;
@@ -322,7 +317,6 @@ body {
   height: 100%;
 }
 
-
 .font-title {
   font-size: 1.8rem;
   font-weight: 400;
@@ -350,7 +344,7 @@ body {
 
 #testimonials {
   padding: 5rem 0;
-  background: rgba(243, 243, 243);
+  background: #f3f3f3; /* fixed from invalid rgba */
 }
 
 .testimonial-title {
@@ -421,13 +415,13 @@ body {
   margin: auto;
 }
 
-.form-container input {
+.form-container input,
+.form-container textarea {
   display: block;
   width: 100%;
   border: none;
   border-bottom: 2px solid #ddd;
   padding: 1rem 0;
-  box-shadow: none;
   outline: none;
   margin-bottom: 1rem;
   color: #444;
@@ -435,13 +429,6 @@ body {
 }
 
 .form-container textarea {
-  display: block;
-  width: 100%;
-  border: none;
-  border-bottom: 2px solid #ddd;
-  color: #444;
-  outline: none;
-  padding: 1rem 0;
   resize: none;
 }
 
@@ -486,7 +473,6 @@ body {
 
   .navbar-container input[type="checkbox"] {
     position: absolute;
-    display: block;
     height: 32px;
     width: 30px;
     top: 20px;
@@ -496,7 +482,6 @@ body {
   }
 
   .navbar-container .hamburger-lines {
-    display: block;
     height: 23px;
     width: 35px;
     position: absolute;
@@ -509,7 +494,6 @@ body {
   }
 
   .navbar-container .hamburger-lines .line {
-    display: block;
     height: 4px;
     width: 100%;
     border-radius: 10px;
@@ -573,8 +557,6 @@ body {
     transform: rotate(-35deg);
   }
 
-  /* ......./ food /......... */
-
   .food-container {
     flex-direction: column;
     align-items: stretch;
@@ -621,7 +603,6 @@ body {
   }
 
   .contact-container {
-    display: flex;
     flex-direction: column;
   }
 
@@ -632,7 +613,7 @@ body {
 
   .logo {
     position: absolute;
-    top: 06px;
+    top: 6px;
     right: 15px;
     font-size: 3rem;
   }
