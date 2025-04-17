@@ -1,3 +1,46 @@
+// Add this function to the top of github-sync.js
+async function uploadImageToGitHub(imageData, fileName) {
+    const token = localStorage.getItem('githubToken');
+    const repo = localStorage.getItem('githubRepo');
+    
+    if (!token || !repo) {
+        console.error('GitHub token or repo not configured');
+        return null;
+    }
+    
+    // Extract base64 data (remove the data:image/xxx;base64, prefix)
+    const base64Data = imageData.split(',')[1];
+    
+    try {
+        // Upload the image to the images folder
+        const response = await fetch(`https://api.github.com/repos/${repo}/contents/images/${fileName}`, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${token}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                message: `Add menu item image: ${fileName}`,
+                content: base64Data
+            })
+        });
+        
+        if (response.status === 201 || response.status === 200) {
+            const data = await response.json();
+            // Return the URL to the raw image
+            return `https://raw.githubusercontent.com/${repo}/main/images/${fileName}`;
+        } else {
+            console.error('Failed to upload image:', await response.text());
+            return null;
+        }
+    } catch (error) {
+        console.error('Error uploading image:', error);
+        return null;
+    }
+}
+
+
 // This function will be called after adding or deleting menu items
 async function syncWithGitHub() {
     // This requires a GitHub personal access token stored in localStorage

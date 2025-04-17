@@ -30,14 +30,14 @@ document.addEventListener('DOMContentLoaded', async function() {
     } else {
         // Display a message if no menu items are available
         foodMenuContainer.innerHTML = `
-            <div class="no-menu-items">
+            <div class="no-menu-items" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
                 <p>No menu items available yet. Please check back soon!</p>
             </div>
         `;
     }
 });
 
-// Function to load menu data from GitHub
+// Function to load menu data from GitHub remains the same
 async function loadMenuFromGitHub() {
     try {
         // Try to get the repository information from localStorage
@@ -49,7 +49,6 @@ async function loadMenuFromGitHub() {
         }
         
         // Fetch the menu data file from GitHub
-        // Using raw content URL to avoid CORS issues and no need for authentication to read public files
         const response = await fetch(`https://raw.githubusercontent.com/${repo}/main/menu-data.json`);
         
         if (response.status === 200) {

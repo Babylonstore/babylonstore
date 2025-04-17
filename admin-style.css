@@ -16,6 +16,32 @@
     justify-content: flex-end;
 }
 
+/* Add to admin-style.css */
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: 10px;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+/* Update your existing style for menu-items-actions */
+.menu-items-actions {
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
 .btn-secondary {
     background-color: #6c757d;
     color: white;
