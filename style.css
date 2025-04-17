@@ -298,47 +298,7 @@ body {
   padding: 2rem 0;
 }
 
-.food-menu-container img {
-  display: block;
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
-}
-
-.food-menu-item {
-  display: flex;
-  flex-direction: row;
-  background-color: #fff;
-  border-radius: 1rem;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  height: 100%;
-}
-
-.font-title {
-  font-size: 1.8rem;
-  font-weight: 400;
-  color: #444;
-}
-
 /* This is the TITLE */
-.food-description {
-  margin: auto 1.5rem;
-  color: #a21111;
-}
-
-.food-description p {
-  font-size: 1.4rem;
-  color: #555;
-  font-weight: 500;
-}
-
-.food-description .food-price {
-  color: #117964;
-  font-weight: 700;
-}
 
 /* ........./ Testimonial /.......... */
 
@@ -589,15 +549,6 @@ body {
     text-align: center;
   }
 
-  .food-menu-container img {
-    margin: auto;
-  }
-
-  .food-menu-item {
-    flex-direction: column;
-    text-align: center;
-  }
-
   .form-container {
     width: 90%;
   }
@@ -639,4 +590,65 @@ body {
   .showcase-area {
     height: 50vmax;
   }
+}
+
+
+.food-menu-item {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  padding: 1.5rem;
+  gap: 1.5rem;
+}
+
+.food-menu-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.food-img img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #f3f3f3;
+}
+
+.food-info {
+  flex: 1;
+}
+
+.food-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 0.5rem;
+}
+
+.food-description {
+  font-size: 1.4rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+}
+
+.food-price {
+  font-size: 1.5rem;
+  color: #117964;
+  font-weight: 600;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 0.6rem;
+  background-color: #ff4d4d;
+  color: white;
+  padding: 0.4rem 1rem;
+  font-size: 1.2rem;
+  border-radius: 20px;
 }

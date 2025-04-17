@@ -12,17 +12,19 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (menuItems.length > 0) {
         menuItems.forEach(item => {
             const menuItemHTML = `
-                <div class="food-menu-item">
-                    <div class="food-img">
-                        <img src="${item.image}" alt="${item.title}" />
-                    </div>
-                    <div class="food-description">
-                        <h2 class="food-titile">${item.title}</h2>
-                        <p>${item.description}</p>
-                        <p class="food-price">Price: &#8377; ${item.price}${item.priceSuffix ? ' ' + item.priceSuffix : ''}</p>
-                    </div>
-                </div>
-            `;
+<div class="food-menu-item" data-aos="fade-up" data-aos-duration="400" data-aos-offset="100" data-aos-easing="ease-out-sine">
+              <div class="food-img">
+                <img src="${item.image}" alt="${item.title}" />
+              </div>
+              <div class="food-info">
+                <h2 class="food-title">${item.title}</h2>
+                <p class="food-description">${item.description}</p>
+                <p class="food-price">₹ ${item.price}${item.priceSuffix ? ' ' + item.priceSuffix : ''}</p>
+                ${item.popular ? `<span class="badge">Popular</span>` : ''}
+              </div>
+            </div>
+          `;
+                   
             
             // Append to the container
             foodMenuContainer.innerHTML += menuItemHTML;
